@@ -1,0 +1,68 @@
+import { defineField, defineType } from 'sanity';
+
+export default defineType({
+  name: 'product',
+  title: 'Product',
+  type: 'document',
+  fields: [
+    defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'slug', title: 'URL slug', type: 'slug',
+      options: { source: 'name', maxLength: 90 },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'category', title: 'Room / category', type: 'string',
+      options: {
+        list: [
+          { title: 'Living', value: 'living' }, { title: 'Dining', value: 'dining' },
+          { title: 'Bedroom', value: 'bedroom' }, { title: 'Study', value: 'study' },
+          { title: 'Kids', value: 'kids' }, { title: 'Gifts', value: 'gifts' },
+        ],
+        layout: 'radio',
+      },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'images', title: 'Photographs', type: 'array',
+      of: [{ type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', type: 'string', title: 'Alt text' }] }],
+      description: 'First image is used on cards. Four angles plus one detail shot works well.',
+    }),
+    defineField({
+      name: 'art', title: 'Fallback illustration', type: 'string',
+      description: 'Used only until photographs are uploaded.',
+      options: {
+        list: ['sofa', 'chair', 'table', 'bed', 'wardrobe', 'desk', 'shelf', 'ottoman', 'console', 'bunk', 'playtable', 'toybox', 'board', 'box', 'clock', 'pen'],
+      },
+      initialValue: 'chair',
+    }),
+    defineField({ name: 'price', title: 'Price (PKR)', type: 'number', validation: (r) => r.required().min(0) }),
+    defineField({ name: 'featured', title: 'Show on home page', type: 'boolean', initialValue: false }),
+    defineField({ name: 'inStock', title: 'Currently available', type: 'boolean', initialValue: true }),
+    defineField({
+      name: 'description', title: 'Short description', type: 'text', rows: 2,
+      description: 'One sentence, shown on cards.', validation: (r) => r.required().max(200),
+    }),
+    defineField({
+      name: 'story', title: 'Why we made it', type: 'text', rows: 4,
+      description: 'The paragraph that appears at the bottom of the product page. This sells more than the specs.',
+    }),
+    defineField({ name: 'wood', title: 'Timber', type: 'reference', to: [{ type: 'wood' }] }),
+    defineField({
+      name: 'specs', title: 'Specification', type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'label', type: 'string', title: 'Label' },
+          { name: 'value', type: 'string', title: 'Value' },
+        ],
+        preview: { select: { title: 'label', subtitle: 'value' } },
+      }],
+    }),
+    defineField({ name: 'order', title: 'Sort order', type: 'number', initialValue: 100 }),
+  ],
+  orderings: [{ title: 'Sort order', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
+  preview: {
+    select: { title: 'name', subtitle: 'category', media: 'images.0' },
+  },
+});

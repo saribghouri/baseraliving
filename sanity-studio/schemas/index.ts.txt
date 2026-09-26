@@ -1,0 +1,5 @@
+import product from './product';
+import wood from './wood';
+import project from './project';
+
+export const schemaTypes = [product, wood, project];

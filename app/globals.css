@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 243 239 230;      /* bone  */
+    --fg: 22 20 15;         /* ink   */
+    --card: 251 249 244;    /* ivory */
+    --rule: 217 207 188;    /* line  */
+    --mutedc: 110 103 92;
+    --sandc: 231 225 212;
+  }
+
+  :root[data-theme='dark'] {
+    --bg: 18 17 16;
+    --fg: 239 234 224;
+    --card: 27 25 23;
+    --rule: 54 49 42;
+    --mutedc: 167 159 146;
+    --sandc: 27 25 23;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: rgb(var(--bg));
+    color: rgb(var(--fg));
+    @apply font-sans font-light antialiased;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4 { @apply font-serif font-light leading-tight; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-wrap px-6; }
+
+  .eyebrow {
+    @apply text-[10.5px] uppercase text-walnut;
+    letter-spacing: 0.44em;
+    text-indent: 0.44em;
+  }
+
+  .surface { background: rgb(var(--card)); }
+  .rule    { border-color: rgb(var(--rule)); }
+  .sandbg  { background: rgb(var(--sandc)); }
+  .muted   { color: rgb(var(--mutedc)); }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center overflow-hidden
+           border border-ink bg-ink px-8 py-[15px] text-[11px] uppercase text-bone
+           transition-colors duration-500;
+    letter-spacing: 0.26em;
+  }
+  .btn::before {
+    content: '';
+    @apply absolute inset-0 z-0 translate-y-full bg-walnut transition-transform duration-500 ease-brand;
+  }
+  .btn:hover::before { @apply translate-y-0; }
+  .btn > * { @apply relative z-10; }
+
+  .btn-ghost {
+    @apply border-transparent bg-transparent;
+    border-color: rgb(var(--rule));
+    color: rgb(var(--fg));
+  }
+  .btn-ghost:hover { @apply border-walnut text-bone; }
+
+  .btn-light { @apply border-[#4A4438] bg-transparent text-bone; }
+
+  .field-label {
+    @apply mb-2 block text-[10px] uppercase;
+    letter-spacing: 0.24em;
+    color: rgb(var(--mutedc));
+  }
+
+  .input {
+    @apply w-full rounded-none border px-4 py-3 text-sm font-light outline-none transition-colors;
+    background: rgb(var(--bg));
+    border-color: rgb(var(--rule));
+    color: rgb(var(--fg));
+  }
+  .input:focus { @apply border-walnut; }
+
+  .spec-row {
+    @apply flex justify-between border-b py-3 text-[13px];
+    border-color: rgb(var(--rule));
+  }
+}
+
+/* scroll reveal */
+.rv {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1);
+}
+.rv[data-on='true'] { opacity: 1; transform: none; }
+
+/* marquee */
+@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.marquee { display: inline-block; animation: marquee 34s linear infinite; }
+
+/* hero */
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1) }
+  50%      { transform: translate(-50%, -50%) scale(1.12) }
+}
+.glow { animation: breathe 11s ease-in-out infinite; }
+
+@keyframes draw { to { stroke-dashoffset: 0 } }
+.arch-draw path { stroke-dasharray: 820; stroke-dashoffset: 820; animation: draw 2.6s .5s cubic-bezier(.22,1,.36,1) forwards; }
+
+@keyframes scrollhint {
+  0%, 100% { transform: scaleY(.35); transform-origin: top }
+  50%      { transform: scaleY(1);   transform-origin: top }
+}
+.scroll-hint { animation: scrollhint 2.1s ease-in-out infinite; }
+
+@keyframes plane {
+  0%   { left: -16%; opacity: 0 }
+  12%  { opacity: 1 }
+  86%  { opacity: 1 }
+  100% { left: 100%; opacity: 0 }
+}
+.plane { animation: plane 6.5s cubic-bezier(.22,1,.36,1) infinite; }
+
+.clip { display: block; overflow: hidden; }
+.clip > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s cubic-bezier(.22,1,.36,1);
+}
+.clip[data-on='true'] > span { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  .rv { opacity: 1; transform: none; }
+  .clip > span { transform: none; }
+}
