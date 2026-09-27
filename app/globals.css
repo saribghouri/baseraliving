@@ -102,6 +102,18 @@
 .marquee { display: inline-block; animation: marquee 34s linear infinite; }
 
 /* hero */
+.hero {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  transition: background-color .5s, color .5s;
+}
+:root[data-theme='dark'] .hero .btn:not(.btn-ghost) {
+  background: #F3EFE6;
+  border-color: #F3EFE6;
+  color: #16140F;
+}
+:root[data-theme='dark'] .hero .btn:not(.btn-ghost):hover { color: #F3EFE6; }
+
 @keyframes breathe {
   0%, 100% { transform: translate(-50%, -50%) scale(1) }
   50%      { transform: translate(-50%, -50%) scale(1.12) }

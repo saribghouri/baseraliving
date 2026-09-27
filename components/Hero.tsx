@@ -26,7 +26,7 @@ export default function Hero() {
   const current = SHOWCASE[i];
 
   return (
-    <div className="relative min-h-[calc(100svh-74px)] overflow-hidden bg-ink text-bone">
+    <div className="hero relative min-h-[calc(100svh-74px)] overflow-hidden">
       <div className="glow pointer-events-none absolute left-[70%] top-1/2 h-[100vmax] w-[100vmax] -translate-x-1/2 -translate-y-1/2"
         style={{ background: 'radial-gradient(circle at 50% 50%, rgba(176,142,107,.22), transparent 55%)' }} />
       <div className="pointer-events-none absolute inset-0 opacity-50"
@@ -49,10 +49,10 @@ export default function Hero() {
           <div className="mb-9 flex flex-wrap justify-center gap-3 transition-opacity duration-700 lg:justify-start"
             style={{ opacity: on ? 1 : 0, transitionDelay: '.5s' }}>
             <Link href="/collection" className="btn"><span>Shop now</span></Link>
-            <Link href="/bespoke" className="btn btn-light"><span>Custom order</span></Link>
+            <Link href="/bespoke" className="btn btn-ghost"><span>Custom order</span></Link>
           </div>
 
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10.5px] uppercase tracking-[0.24em] text-[#8E877B] transition-opacity duration-700 lg:justify-start"
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 muted text-[10.5px] uppercase tracking-[0.24em] transition-opacity duration-700 lg:justify-start"
             style={{ opacity: on ? 1 : 0, transitionDelay: '.7s' }}>
             <li>Solid wood</li>
             <li className="text-brass">·</li>
@@ -82,9 +82,9 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="mt-2 flex items-center justify-between gap-4 border-t border-[#3A342B] pt-4">
+          <div className="mt-2 flex items-center justify-between gap-4 rule border-t pt-4">
             <Link href={current.href} className="group flex items-baseline gap-3">
-              <span className="text-[10px] tracking-[0.3em] text-[#8E877B]">0{i + 1}</span>
+              <span className="muted text-[10px] tracking-[0.3em]">0{i + 1}</span>
               <span className="font-serif text-2xl transition-colors group-hover:text-brass">{current.name}</span>
               <span className="text-brass transition-transform group-hover:translate-x-1">→</span>
             </Link>
@@ -92,7 +92,7 @@ export default function Hero() {
               {SHOWCASE.map((s, n) => (
                 <button key={s.art} type="button" aria-label={`Show ${s.name}`} onClick={() => setI(n)}
                   className="h-[3px] w-6 transition-colors duration-500"
-                  style={{ background: n === i ? '#B08E6B' : '#3A342B' }} />
+                  style={{ background: n === i ? '#B08E6B' : 'rgb(var(--rule))' }} />
               ))}
             </div>
           </div>
