@@ -66,9 +66,10 @@ export default function Hero() {
         <div className="relative mx-auto w-full max-w-[640px] transition-all duration-1000 ease-brand"
           style={{ opacity: on ? 1 : 0, transform: on ? 'none' : 'translateY(24px)', transitionDelay: '.3s' }}>
           <div className="relative aspect-[4/3]">
-            <svg viewBox="0 0 160 190" fill="none" preserveAspectRatio="xMidYMid meet"
-              className="arch-draw pointer-events-none absolute inset-0 h-full w-full opacity-30">
-              <path d="M14 178 V78 C14 40 44 12 80 12 C116 12 146 40 146 78 V178" stroke="#B08E6B" strokeWidth="1" fill="none" />
+            <svg viewBox="0 0 160 190" fill="none"
+              className="arch-draw pointer-events-none absolute left-1/2 top-[46%] w-[min(66vmin,470px)] -translate-x-1/2 -translate-y-1/2 opacity-40">
+              <path d="M14 178 V78 C14 40 44 12 80 12 C116 12 146 40 146 78 V178" stroke="#B08E6B" strokeWidth="1.4" fill="none" />
+              <path d="M25 178 V80 C25 47 50 23 80 23 C110 23 135 47 135 80 V178" stroke="#B08E6B" strokeWidth=".7" fill="none" />
             </svg>
             {SHOWCASE.map((s, n) => (
               <div key={s.art}

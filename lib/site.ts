@@ -17,6 +17,7 @@ export const site = {
   area: 'DHA, Karachi',
   hours: 'Mon – Sun, 11am – 9pm',
   instagram: 'https://instagram.com/baseraliving',
+  facebook: 'https://facebook.com/baseraliving',
 };
 
 export const nav = [
