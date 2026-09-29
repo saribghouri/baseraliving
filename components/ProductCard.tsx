@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import type { Product } from '@/lib/products';
 import { categoryName } from '@/lib/products';
-import { pkr } from '@/lib/format';
 import ProductImage from './ProductImage';
 import Reveal from './Reveal';
 import { useShortlist } from './EnquiryBar';
@@ -15,7 +14,7 @@ export default function ProductCard({
   const { items, toggle, ready } = useShortlist();
   const saved = ready && items.includes(product.slug);
 
-  const msg = `Assalam o Alaikum, I am interested in the ${product.name} (${pkr(product.price)}) from ${site.name}. Could you share availability and custom options?`;
+  const msg = `Assalam o Alaikum, I am interested in the ${product.name} from ${site.name}. Could you share availability and custom options?`;
 
   return (
     <Reveal delay={((index % 4) + 1) as 1 | 2 | 3 | 4}>
@@ -51,7 +50,7 @@ export default function ProductCard({
           <Link href={`/product/${product.slug}`} className="font-serif text-2xl">{product.name}</Link>
           <p className="muted flex-1 text-[12.5px]">{product.description}</p>
           <div className="flex items-center justify-between gap-3 border-t pt-3" style={{ borderColor: 'rgb(var(--rule))' }}>
-            <div className="font-serif text-xl">{pkr(product.price)}</div>
+            <div className="muted text-[10px] uppercase tracking-[0.2em]">Made to order</div>
             <a href={waLink(msg)} target="_blank" rel="noopener"
               className="border px-4 py-2.5 text-[10px] uppercase tracking-[0.22em] transition-colors hover:border-ink hover:bg-ink hover:text-bone"
               style={{ borderColor: 'rgb(var(--rule))' }}>

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { categoryName } from '@/lib/products';
-import { pkr } from '@/lib/format';
 import { site } from '@/lib/site';
 import { getProductBySlug, getProductSlugs, getProducts } from '@/lib/content';
 import ProductDetail from '@/components/ProductDetail';
@@ -21,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return { title: 'Not found' };
   return {
     title: p.name,
-    description: `${p.description} ${pkr(p.price)}. Made to order by ${site.name}.`,
+    description: `${p.description} Made to order by ${site.name}.`,
     openGraph: { title: `${p.name} — ${site.name}`, description: p.description },
   };
 }
@@ -40,13 +39,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     name: product.name,
     description: product.description,
     brand: { '@type': 'Brand', name: site.name },
-    offers: {
-      '@type': 'Offer',
-      price: product.price,
-      priceCurrency: 'PKR',
-      availability: 'https://schema.org/MadeToOrder',
-      seller: { '@type': 'Organization', name: site.name, telephone: site.phone, email: site.email },
-    },
   };
 
   return (

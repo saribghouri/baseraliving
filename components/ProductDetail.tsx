@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import type { Product } from '@/lib/products';
 import { categoryName, finishes } from '@/lib/products';
-import { pkr } from '@/lib/format';
 import ProductImage from './ProductImage';
 import Illustration from './Illustration';
 import Reveal from './Reveal';
@@ -75,10 +74,7 @@ export default function ProductDetail({
             <div className="text-[9px] uppercase tracking-[0.28em] text-walnut">{categoryName(product.category)}</div>
             <h1 className="my-3.5 text-[clamp(32px,4.4vw,52px)]">{product.name}</h1>
             <p className="muted">{product.description}</p>
-            <div className="my-6 flex flex-wrap items-baseline gap-4">
-              <span className="font-serif text-3xl">{pkr(product.price)}</span>
-              <span className="muted text-[11px] uppercase tracking-[0.2em]">Made to order</span>
-            </div>
+            <div className="muted my-6 text-[11px] uppercase tracking-[0.2em]">Made to order</div>
 
             <div className="mb-8">
               <span className="field-label">Finish</span>
@@ -92,7 +88,7 @@ export default function ProductDetail({
               <div className="muted mt-2.5 text-[11px]">{finishes[finish].name} — all four available on this piece</div>
             </div>
 
-            <EnquiryButtons name={product.name} price={pkr(product.price)} />
+            <EnquiryButtons name={product.name} />
 
             <button onClick={() => toggle(product.slug)}
               className="muted mt-4 w-full text-[10.5px] uppercase tracking-[0.18em] underline underline-offset-4">

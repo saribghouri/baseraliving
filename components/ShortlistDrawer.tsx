@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useShortlist } from './EnquiryBar';
-import { pkr } from '@/lib/format';
 import { site, waLink } from '@/lib/site';
 import Illustration from './Illustration';
 import type { Product } from '@/lib/products';
@@ -21,7 +20,7 @@ export default function ShortlistDrawer({
 
   const send = () => {
     if (!chosen.length) return;
-    const rows = chosen.map((p, i) => `${i + 1}. ${p.name} — ${pkr(p.price)}`);
+    const rows = chosen.map((p, i) => `${i + 1}. ${p.name}`);
     const msg = `Assalam o Alaikum, I am interested in these pieces from ${site.name}:\n\n${rows.join('\n')}\n\nCould you share availability, custom options and delivery?`;
     window.open(waLink(msg), '_blank', 'noopener');
   };
@@ -63,7 +62,6 @@ export default function ShortlistDrawer({
               </div>
               <div>
                 <Link href={`/product/${p.slug}`} onClick={onClose} className="font-serif text-[17px]">{p.name}</Link>
-                <div className="muted text-[11px]">{pkr(p.price)}</div>
               </div>
               <button onClick={() => remove(p.slug)} className="muted text-[9.5px] uppercase tracking-[0.18em] underline underline-offset-4">Remove</button>
             </div>
