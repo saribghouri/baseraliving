@@ -43,6 +43,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-2 lg:gap-2.5">
                 <li><Link href="/collection" className="hover:text-brass">All pieces</Link></li>
                 <li><Link href="/bedroom" className="hover:text-brass">Bedroom</Link></li>
+                <li><Link href="/kitchen" className="hover:text-brass">Kitchen</Link></li>
                 <li><Link href="/kids" className="hover:text-brass">Kids &amp; play rooms</Link></li>
                 <li><Link href="/gifts" className="hover:text-brass">Wooden gifts</Link></li>
                 <li><Link href="/bespoke" className="hover:text-brass">Bespoke</Link></li>

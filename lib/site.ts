@@ -23,6 +23,7 @@ export const site = {
 export const nav = [
   { href: '/collection', label: 'Collection' },
   { href: '/bedroom', label: 'Bedroom' },
+  { href: '/kitchen', label: 'Kitchen' },
   { href: '/kids', label: 'Kids' },
   { href: '/gifts', label: 'Gifts' },
   { href: '/wood', label: 'Wood' },

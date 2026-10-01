@@ -182,6 +182,36 @@ const scenes: Record<ArtKey, (p: S) => ReactElement> = {
     </g>
   ),
 
+  kitchen: ({ id }) => (
+    <g>
+      <Floor id={id} rx={160} />
+      {/* wall cabinets */}
+      <rect x="52" y="34" width="296" height="62" rx="5" fill={`url(#${id}-wood)`} />
+      {[60, 134, 208, 282].map((x) => (
+        <rect key={x} x={x} y="42" width="58" height="46" rx="3" fill={`url(#${id}-woodLight)`} />
+      ))}
+      {[112, 186, 260].map((x) => (
+        <rect key={x} x={x} y="60" width="3" height="12" rx="1.5" fill={`url(#${id}-brass)`} />
+      ))}
+      {/* tiled splashback */}
+      <rect x="52" y="96" width="296" height="52" fill="#E9E2D4" />
+      <path d="M52 113h296M52 130h296M100 96v52M150 96v52M200 96v52M250 96v52M300 96v52" stroke="#D6CCBA" strokeWidth="1" />
+      {/* tap */}
+      <path d="M232 148v-22h16v8" stroke="#8C8578" strokeWidth="4" fill="none" strokeLinecap="round" />
+      {/* worktop and base cabinets */}
+      <rect x="44" y="146" width="312" height="12" rx="3" fill={`url(#${id}-woodPale)`} />
+      <rect x="52" y="158" width="296" height="92" rx="4" fill={`url(#${id}-wood)`} />
+      <rect x="60" y="166" width="88" height="24" rx="3" fill={`url(#${id}-woodLight)`} />
+      <rect x="60" y="196" width="88" height="46" rx="3" fill={`url(#${id}-woodLight)`} />
+      <rect x="156" y="166" width="88" height="76" rx="3" fill={`url(#${id}-woodLight)`} />
+      <rect x="252" y="166" width="88" height="76" rx="3" fill={`url(#${id}-woodLight)`} />
+      <rect x="92" y="176" width="24" height="4" rx="2" fill={`url(#${id}-brass)`} />
+      <rect x="92" y="216" width="24" height="4" rx="2" fill={`url(#${id}-brass)`} />
+      <rect x="236" y="196" width="4" height="22" rx="2" fill={`url(#${id}-brass)`} />
+      <rect x="260" y="196" width="4" height="22" rx="2" fill={`url(#${id}-brass)`} />
+    </g>
+  ),
+
   bunk: ({ id }) => (
     <g>
       <Floor id={id} rx={130} />

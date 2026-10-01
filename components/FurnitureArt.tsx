@@ -10,6 +10,7 @@ const PATHS: Partial<Record<ArtKey, string>> = {
   shelf: 'M22 8h56v84H22z M22 32h56 M22 54h56 M22 74h56 M32 14v14 M38 16v12 M44 14v14',
   ottoman: 'M20 50h60v26H20z M20 50a10 10 0 0 1 10-10h40a10 10 0 0 1 10 10 M26 76v8 M74 76v8',
   console: 'M8 34h84v7H8z M16 41v44 M84 41v44 M16 66h68 M30 50h40v12H30z',
+  kitchen: 'M10 12h80v20H10z M50 12v20 M10 52h80v34H10z M6 50h88 M36 52v34 M64 52v34 M24 66h4 M48 66h4 M72 66h4 M58 50v-8h8v4',
 };
 
 export default function FurnitureArt({

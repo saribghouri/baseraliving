@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getProductsByCategory } from '@/lib/content';
 import ProductCard from '@/components/ProductCard';
 import RoomHero from '@/components/RoomHero';
@@ -7,7 +8,6 @@ import RoomFeatures from '@/components/RoomFeatures';
 import SectionHead from '@/components/SectionHead';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import Illustration from '@/components/Illustration';
 
 export const metadata: Metadata = {
   title: 'Kids Furniture & Play Rooms',
@@ -23,31 +23,62 @@ const SAFETY: [string, string][] = [
   ['Sized to the child, not the catalogue', 'Play tables at 20 inches, not 24. Wardrobe rails at 38 inches, not 60. A child who can reach their own things will use them.'],
 ];
 
-const AGES: [string, string][] = [
-  ['1 – 3 yrs', 'Low beds, toy storage, soft edges'],
-  ['3 – 7 yrs', 'Play tables, first desks, low wardrobes'],
-  ['7 – 12 yrs', 'Bunks, study desks, bookshelves'],
-  ['12+ yrs', 'Single beds, full desks, storage'],
+// soft, wood-friendly colours for the playful touches
+const PLAY = { sage: '#9DB5A0', sun: '#E3B95B', coral: '#E39A7B', sky: '#8FB3C9' };
+
+const AGES: [string, string, string][] = [
+  ['1 – 3 yrs', 'Low beds, toy storage, soft edges', PLAY.coral],
+  ['3 – 7 yrs', 'Play tables, first desks, low wardrobes', PLAY.sun],
+  ['7 – 12 yrs', 'Bunks, study desks, bookshelves', PLAY.sage],
+  ['12+ yrs', 'Single beds, full desks, storage', PLAY.sky],
 ];
+
+/** Floating shapes over the hero — circle, triangle, star, ring, dots. */
+function PlayShapes() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <span className="bob absolute right-[8%] top-[16%] h-16 w-16 rounded-full opacity-70 sm:h-20 sm:w-20"
+        style={{ background: PLAY.coral }} />
+      <svg className="bob absolute right-[24%] top-[60%] hidden h-16 w-16 opacity-75 sm:block" viewBox="0 0 40 40"
+        style={{ animationDelay: '-2s', ['--r' as string]: '-12deg' }}>
+        <path d="M20 4 L37 34 H3 Z" fill={PLAY.sun} />
+      </svg>
+      <svg className="bob absolute right-[4%] top-[66%] h-12 w-12 opacity-80 sm:h-14 sm:w-14" viewBox="0 0 40 40"
+        style={{ animationDelay: '-4s' }}>
+        <path d="M20 3l4.9 10.6 11.6 1.3-8.6 7.9 2.4 11.4L20 28.4 9.7 34.2l2.4-11.4-8.6-7.9 11.6-1.3z" fill={PLAY.sage} />
+      </svg>
+      <span className="bob absolute right-[32%] top-[12%] hidden h-12 w-12 rounded-full border-[6px] opacity-70 md:block"
+        style={{ borderColor: PLAY.sky, animationDelay: '-1s' }} />
+      <span className="bob absolute right-[16%] top-[42%] h-3 w-3 rounded-full" style={{ background: PLAY.sun, animationDelay: '-3s' }} />
+      <span className="bob absolute right-[40%] top-[78%] hidden h-2.5 w-2.5 rounded-full md:block" style={{ background: PLAY.coral, animationDelay: '-5s' }} />
+    </div>
+  );
+}
 
 export const revalidate = 60;
 
 export default async function KidsPage() {
-  const pieces = await getProductsByCategory('kids');
+  // pieces with photographs first, illustrated ones after
+  const pieces = (await getProductsByCategory('kids'))
+    .sort((a, b) => Number(!!b.photos?.length) - Number(!!a.photos?.length));
 
   return (
-    <>
-      <RoomHero
-        eyebrow="Kids & play rooms"
-        art="bunk"
-        title="Furniture that survives childhood, and outlives it"
-        lead="Children's furniture gets climbed on, drawn on and stood on. We build it to be handed down, not thrown out in three years."
-      />
+    <div className="kids-page">
+      <div className="relative">
+        <RoomHero
+          eyebrow="Kids & play rooms"
+          art="bunk"
+          title="Furniture that survives childhood, and outlives it"
+          lead="Children's furniture gets climbed on, drawn on and stood on. We build it to be handed down, not thrown out in three years."
+        />
+        <PlayShapes />
+      </div>
 
-      <div className="grid grid-cols-2 border-b md:grid-cols-4" style={{ borderColor: 'rgb(var(--rule))' }}>
-        {AGES.map(([age, what]) => (
-          <div key={age} className="border-b border-r px-4 py-8 text-center last:border-r-0 md:border-b-0"
+      <div className="wrap grid grid-cols-2 gap-3 py-8 md:grid-cols-4 md:gap-5">
+        {AGES.map(([age, what, color]) => (
+          <div key={age} className="surface flex flex-col items-center border px-4 py-6 text-center"
             style={{ borderColor: 'rgb(var(--rule))' }}>
+            <span className="mb-3 h-3 w-10 rounded-full" style={{ background: color }} />
             <div className="font-serif text-[24px] text-walnut">{age}</div>
             <div className="muted mt-1 text-[10.5px]">{what}</div>
           </div>
@@ -86,8 +117,9 @@ export default async function KidsPage() {
       <section className="py-20">
         <div className="wrap grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
-            <div className="surface aspect-[4/3] border p-6" style={{ borderColor: 'rgb(var(--rule))' }}>
-              <Illustration art="playtable" id="kids-playroom" />
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image src="/kids/house-loft-bed.jpg" alt="Play loft with a little house on top and a floor bed below"
+                fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
           </Reveal>
           <Reveal delay={1}>
@@ -108,6 +140,6 @@ export default async function KidsPage() {
       </section>
 
       <CtaBand />
-    </>
+    </div>
   );
 }

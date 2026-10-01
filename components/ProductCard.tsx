@@ -25,7 +25,7 @@ export default function ProductCard({
           <Link href={`/product/${product.slug}`}
             className="sandbg relative block aspect-[4/3] overflow-hidden border-b"
             style={{ borderColor: 'rgb(var(--rule))' }}>
-            <ProductImage images={product.images} art={product.art} id={`c-${product.slug}`} alt={product.name} />
+            <ProductImage images={product.images} photos={product.photos} art={product.art} id={`c-${product.slug}`} alt={product.name} />
             <div className="absolute inset-x-0 bottom-0 translate-y-full bg-ink py-2.5 text-center text-[9.5px] uppercase tracking-[0.26em] text-bone transition-transform duration-500 ease-brand group-hover:translate-y-0">
               View piece
             </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useShortlist } from './EnquiryBar';
 import { site, waLink } from '@/lib/site';
@@ -57,8 +58,10 @@ export default function ShortlistDrawer({
             </div>
           ) : chosen.map((p) => (
             <div key={p.slug} className="grid grid-cols-[62px_1fr_auto] items-center gap-4 border-b py-5" style={{ borderColor: 'rgb(var(--rule))' }}>
-              <div className="sandbg grid h-[62px] w-[62px] place-items-center overflow-hidden border p-1" style={{ borderColor: 'rgb(var(--rule))' }}>
-                <Illustration art={p.art} id={`sl-${p.slug}`} />
+              <div className={`sandbg relative grid h-[62px] w-[62px] place-items-center overflow-hidden border ${p.photos?.length ? '' : 'p-1'}`} style={{ borderColor: 'rgb(var(--rule))' }}>
+                {p.photos?.length
+                  ? <Image src={p.photos[0]} alt="" fill sizes="62px" className="object-cover" />
+                  : <Illustration art={p.art} id={`sl-${p.slug}`} />}
               </div>
               <div>
                 <Link href={`/product/${p.slug}`} onClick={onClose} className="font-serif text-[17px]">{p.name}</Link>

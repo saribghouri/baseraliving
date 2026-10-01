@@ -3,11 +3,12 @@ import { urlFor } from '@/lib/sanity';
 import Illustration from './Illustration';
 import type { ArtKey } from '@/lib/products';
 
-/** Real photograph when one has been uploaded, illustration until then. */
+/** Real photograph when one has been uploaded (CMS first, then /public), illustration until then. */
 export default function ProductImage({
-  images, art, id, alt, sizes = '(max-width: 768px) 100vw, 33vw', priority = false,
+  images, photos, art, id, alt, sizes = '(max-width: 768px) 100vw, 33vw', priority = false,
 }: {
   images?: unknown[];
+  photos?: string[];
   art: ArtKey;
   id: string;
   alt: string;
@@ -15,7 +16,7 @@ export default function ProductImage({
   priority?: boolean;
 }) {
   const first = images?.[0];
-  const url = first ? urlFor(first)?.width(1200).quality(82).url() : null;
+  const url = (first ? urlFor(first)?.width(1200).quality(82).url() : null) ?? photos?.[0] ?? null;
 
   if (url) {
     return (

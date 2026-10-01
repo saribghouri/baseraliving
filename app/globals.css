@@ -137,6 +137,13 @@
 }
 .plane { animation: plane 6.5s cubic-bezier(.22,1,.36,1) infinite; }
 
+/* kids page — floating shapes in the hero */
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)) }
+  50%      { transform: translateY(-14px) rotate(calc(var(--r, 0deg) + 8deg)) }
+}
+.bob { animation: bob 6s ease-in-out infinite; }
+
 .clip { display: block; overflow: hidden; }
 .clip > span {
   display: block;

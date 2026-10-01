@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getProductsByCategory } from '@/lib/content';
 import ProductCard from '@/components/ProductCard';
 import RoomHero from '@/components/RoomHero';
@@ -7,7 +8,6 @@ import RoomFeatures from '@/components/RoomFeatures';
 import SectionHead from '@/components/SectionHead';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import Illustration from '@/components/Illustration';
 
 export const metadata: Metadata = {
   title: 'Bedroom Furniture',
@@ -33,7 +33,9 @@ const SIZES: [string, string][] = [
 export const revalidate = 60;
 
 export default async function BedroomPage() {
-  const pieces = await getProductsByCategory('bedroom');
+  // pieces with photographs first, illustrated ones after
+  const pieces = (await getProductsByCategory('bedroom'))
+    .sort((a, b) => Number(!!b.photos?.length) - Number(!!a.photos?.length));
 
   return (
     <>
@@ -82,8 +84,9 @@ export default async function BedroomPage() {
             <Link href="/bespoke" className="btn"><span>Plan a bedroom</span></Link>
           </Reveal>
           <Reveal delay={1}>
-            <div className="surface aspect-[4/3] border p-6" style={{ borderColor: 'rgb(var(--rule))' }}>
-              <Illustration art="wardrobe" id="bedroom-room" />
+            <div className="relative aspect-square overflow-hidden">
+              <Image src="/bedroom/wardrobe-6-door.jpg" alt="Six-door walnut wardrobe wall with drawers"
+                fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
           </Reveal>
         </div>

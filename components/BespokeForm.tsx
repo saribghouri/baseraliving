@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { site, waLink } from '@/lib/site';
 
-const TYPES = ['Sofa / seating', 'Dining table & chairs', 'Bed / bedroom set', 'Wardrobe / storage', 'Office / study', 'Complete interior'];
+const TYPES = ['Sofa / seating', 'Dining table & chairs', 'Bed / bedroom set', 'Wardrobe / storage', 'Kitchen', 'Office / study', 'Complete interior'];
 const BUDGETS = ['Under Rs 100,000', 'Rs 100,000 – 300,000', 'Rs 300,000 – 700,000', 'Above Rs 700,000', 'Not sure yet'];
 
 export default function BespokeForm() {

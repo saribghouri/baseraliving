@@ -18,10 +18,16 @@ export default function ProductDetail({
   const { items, toggle, ready } = useShortlist();
   const saved = ready && items.includes(product.slug);
 
-  const photos = product.images ?? [];
+  // CMS images first, then local photographs from /public
+  const photos: { full: string; thumb: string }[] = product.images?.length
+    ? product.images.flatMap((img) => {
+        const full = urlFor(img)?.width(1400).quality(85).url();
+        const thumb = urlFor(img)?.width(300).quality(70).url();
+        return full && thumb ? [{ full, thumb }] : [];
+      })
+    : (product.photos ?? []).map((src) => ({ full: src, thumb: src }));
   const hasPhotos = photos.length > 0;
-  const active = photos[shot] ?? photos[0];
-  const activeUrl = active ? urlFor(active)?.width(1400).quality(85).url() : null;
+  const activeUrl = (photos[shot] ?? photos[0])?.full ?? null;
 
   return (
     <section className="py-16">
@@ -50,16 +56,13 @@ export default function ProductDetail({
 
             {hasPhotos && photos.length > 1 && (
               <div className="mt-3 grid grid-cols-4 gap-2.5">
-                {photos.slice(0, 4).map((img, i) => {
-                  const t = urlFor(img)?.width(300).quality(70).url();
-                  return (
-                    <button key={i} onClick={() => setShot(i)}
-                      className={`sandbg relative aspect-square overflow-hidden border transition-colors ${shot === i ? 'border-walnut' : ''}`}
-                      style={shot === i ? undefined : { borderColor: 'rgb(var(--rule))' }}>
-                      {t && <Image src={t} alt="" fill sizes="120px" className="object-cover" />}
-                    </button>
-                  );
-                })}
+                {photos.slice(0, 4).map((p, i) => (
+                  <button key={i} onClick={() => setShot(i)}
+                    className={`sandbg relative aspect-square overflow-hidden border transition-colors ${shot === i ? 'border-walnut' : ''}`}
+                    style={shot === i ? undefined : { borderColor: 'rgb(var(--rule))' }}>
+                    <Image src={p.thumb} alt="" fill sizes="120px" className="object-cover" />
+                  </button>
+                ))}
               </div>
             )}
 

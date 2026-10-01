@@ -16,7 +16,7 @@ export default defineType({
       options: {
         list: [
           { title: 'Living', value: 'living' }, { title: 'Dining', value: 'dining' },
-          { title: 'Bedroom', value: 'bedroom' }, { title: 'Study', value: 'study' },
+          { title: 'Bedroom', value: 'bedroom' }, { title: 'Kitchen', value: 'kitchen' }, { title: 'Study', value: 'study' },
           { title: 'Kids', value: 'kids' }, { title: 'Gifts', value: 'gifts' },
         ],
         layout: 'radio',
