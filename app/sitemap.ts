@@ -3,7 +3,7 @@ import { getProductSlugs } from '@/lib/content';
 import { site } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = ['', '/collection', '/bedroom', '/kitchen', '/kids', '/gifts', '/wood', '/portfolio', '/craft', '/bespoke', '/story', '/visit'];
+  const routes = ['', '/collection', '/bedroom', '/kitchen', '/study', '/kids', '/gifts', '/wood', '/portfolio', '/craft', '/bespoke', '/story', '/visit'];
 
   const pages = routes.map((p) => ({
     url: `${site.url}${p}`,

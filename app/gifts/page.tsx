@@ -22,7 +22,9 @@ const OCCASIONS = [
 export const revalidate = 60;
 
 export default async function GiftsPage() {
-  const pieces = await getProductsByCategory('gifts');
+  // pieces with photographs first, illustrated ones after
+  const pieces = (await getProductsByCategory('gifts'))
+    .sort((a, b) => Number(!!b.photos?.length) - Number(!!a.photos?.length));
 
   return (
     <>

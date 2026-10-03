@@ -55,7 +55,7 @@ export default function Header() {
               </span>
             </Link>
 
-            <nav className="hidden gap-6 text-[11px] uppercase tracking-[0.16em] lg:flex">
+            <nav className="hidden gap-4 text-[11px] uppercase tracking-[0.14em] lg:flex xl:gap-6 xl:tracking-[0.16em]">
               {nav.map((n) => {
                 const active = path === n.href || path.startsWith(n.href + '/');
                 return (

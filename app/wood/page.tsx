@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getWoods, getProducts } from '@/lib/content';
 import RoomHero from '@/components/RoomHero';
 import SectionHead from '@/components/SectionHead';
@@ -47,14 +48,36 @@ export default async function WoodPage() {
               const pieces = byWood(w.slug);
               return (
                 <Reveal key={w.slug} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
-                  <article className="surface grid gap-8 border p-8 lg:grid-cols-[200px_1fr] lg:p-10"
+                  <article className="surface grid gap-8 border p-8 lg:grid-cols-[260px_1fr] lg:p-10"
                     style={{ borderColor: 'rgb(var(--rule))' }}>
                     <div>
-                      <div className="aspect-square w-full border"
-                        style={{
-                          borderColor: 'rgb(var(--rule))',
-                          background: `repeating-linear-gradient(97deg, ${w.swatch[0]} 0 7px, ${w.swatch[1]} 7px 13px, ${w.swatch[0]} 13px 22px)`,
-                        }} />
+                      {w.photos?.length ? (
+                        <>
+                          <div className="relative aspect-square w-full overflow-hidden border" style={{ borderColor: 'rgb(var(--rule))' }}>
+                            <Image src={w.photos[0]} alt={`${w.name} timber in the workshop`} fill
+                              sizes="(max-width: 1024px) 100vw, 260px" className="object-cover" />
+                          </div>
+                          {w.photos.length > 1 && (
+                            <div className="mt-2 grid grid-cols-4 gap-2">
+                              {w.photos.slice(1, 5).map((src) => (
+                                <div key={src} className="relative aspect-square overflow-hidden border" style={{ borderColor: 'rgb(var(--rule))' }}>
+                                  <Image src={src} alt="" fill sizes="64px" className="object-cover" />
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="aspect-square w-full border"
+                          style={{
+                            borderColor: 'rgb(var(--rule))',
+                            background: `repeating-linear-gradient(97deg, ${w.swatch[0]} 0 7px, ${w.swatch[1]} 7px 13px, ${w.swatch[0]} 13px 22px)`,
+                          }} />
+                      )}
+                      {/* finished colour, next to the raw timber */}
+                      <div className="mt-3 h-2 w-full"
+                        style={{ background: `linear-gradient(90deg, ${w.swatch[0]}, ${w.swatch[1]})` }}
+                        title="Finished colour" />
                       <div className="mt-4 flex items-baseline justify-between">
                         <span className="muted text-[10px] uppercase tracking-[0.22em]">Cost</span>
                         <Price n={w.priceIndex} />

@@ -24,6 +24,7 @@ export const nav = [
   { href: '/collection', label: 'Collection' },
   { href: '/bedroom', label: 'Bedroom' },
   { href: '/kitchen', label: 'Kitchen' },
+  { href: '/study', label: 'Study' },
   { href: '/kids', label: 'Kids' },
   { href: '/gifts', label: 'Gifts' },
   { href: '/wood', label: 'Wood' },

@@ -10,6 +10,8 @@ export interface Wood {
   notes: string;
   priceIndex: 1 | 2 | 3 | 4;
   swatch: [string, string];
+  /** photographs in /public, first one is shown large */
+  photos?: string[];
 }
 
 export const woods: Wood[] = [
@@ -23,6 +25,7 @@ export const woods: Wood[] = [
     notes: 'The most expensive timber we stock and the one we recommend for a piece you intend to keep. It machines beautifully, takes oil without blotching, and darkens slowly into a richer brown over about ten years.',
     priceIndex: 4,
     swatch: ['#4A3324', '#7A5C3E'],
+    photos: ['/wood/walnut-logs.jpg'],
   },
   {
     slug: 'sheesham', name: 'Sheesham', localName: 'Tali',
@@ -34,6 +37,7 @@ export const woods: Wood[] = [
     notes: 'The traditional furniture timber of the subcontinent and the hardest thing in our workshop. Extremely resistant to termites and rot. Colour varies considerably board to board, which is either the appeal or the problem depending on your taste.',
     priceIndex: 3,
     swatch: ['#5C3A26', '#9A6B42'],
+    photos: ['/wood/sheesham-log.jpg'],
   },
   {
     slug: 'deodar', name: 'Deodar Cedar', localName: 'Diyar',
@@ -45,6 +49,7 @@ export const woods: Wood[] = [
     notes: 'Naturally repels moths and insects, which is why every old wardrobe in the country is lined with it. Light enough to move, soft enough to dent. We use it where weight and smell matter more than hardness.',
     priceIndex: 2,
     swatch: ['#B08E6B', '#D8BE97' ],
+    photos: ['/wood/deodar-slab.jpg', '/wood/deodar-plank.jpg'],
   },
   {
     slug: 'ash', name: 'Ash', localName: 'Ash',
@@ -56,6 +61,7 @@ export const woods: Wood[] = [
     notes: 'The best timber we know for chairs — it bends under steam and takes shock without splitting. Its pale colour suits lighter interiors and it accepts stain evenly if you want it darker.',
     priceIndex: 3,
     swatch: ['#C9BCA0', '#E6DCC6'],
+    photos: ['/wood/ash-boards.jpg'],
   },
   {
     slug: 'mango', name: 'Mango', localName: 'Aam',
@@ -67,6 +73,7 @@ export const woods: Wood[] = [
     notes: 'Comes from orchard trees at the end of their fruiting life, so it is the most sustainable timber we use and one of the least expensive. The streaking makes every piece different, which suits gifts and small objects.',
     priceIndex: 1,
     swatch: ['#8A6A3A', '#C2A15C'],
+    photos: ['/wood/mango-slabs.jpg'],
   },
   {
     slug: 'teak', name: 'Burma Teak', localName: 'Sagwan',
@@ -78,6 +85,7 @@ export const woods: Wood[] = [
     notes: 'Its natural oil makes it the only timber we will use outdoors or anywhere near water. Expensive and getting more so, so we reserve it for places where nothing else will survive.',
     priceIndex: 4,
     swatch: ['#8B6A32', '#BF9A57'],
+    photos: ['/wood/teak-slab.jpg'],
   },
 ];
 
