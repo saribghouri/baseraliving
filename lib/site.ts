@@ -2,7 +2,7 @@ export const site = {
   name: 'Basera Living',
   tagline: 'Furniture & Interiors',
   established: 1996,
-  url: 'https://baseraliving.com',
+  url: 'https://baseralivingco.com',
   description:
     'Solid wood furniture and complete interiors, built by hand in our own workshop since 1996. Custom sizes, finishes and fabrics on every piece.',
 
@@ -16,8 +16,8 @@ export const site = {
   address: '[Showroom address]',
   area: 'DHA, Karachi',
   hours: 'Mon – Sun, 11am – 9pm',
-  instagram: 'https://instagram.com/baseraliving',
-  facebook: 'https://facebook.com/baseraliving',
+  instagram: 'https://instagram.com/baseraliving.pk',
+  facebook: 'https://www.facebook.com/profile.php?id=61595314193167',
 };
 
 export const nav = [
